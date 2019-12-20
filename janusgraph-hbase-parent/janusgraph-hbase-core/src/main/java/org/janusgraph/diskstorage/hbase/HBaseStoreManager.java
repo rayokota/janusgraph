@@ -32,6 +32,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.TimeUnit;
@@ -327,6 +328,10 @@ public class HBaseStoreManager extends DistributedStoreManager implements KeyCol
             hconf.set(zkPortKey, zkPort.toString());
             logger.info("Copied Zookeeper Port from {} to {}: {}", GraphDatabaseConfiguration.STORAGE_PORT, zkPortKey, zkPort);
         }
+
+        hconf.set("hbase.client.connection.impl", "io.kstore.KafkaStoreConnection");
+        hconf.set("kafkacache.bootstrap.servers", "localhost:9092");
+        hconf.set("rocksdb.root.dir", "/tmp/rocksdb_" + UUID.randomUUID());
 
         this.shortCfNames = config.get(SHORT_CF_NAMES);
 

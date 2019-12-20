@@ -64,7 +64,7 @@ public class HBaseStorageSetup {
         if (null != tmp) {
             parentDir = tmp;
         }
-        HBASE_PARENT_DIR = parentDir;
+        HBASE_PARENT_DIR = "/Users/ryokota/thirdparty/janusgraph/janusgraph-hbase-parent";
         compat = HBaseCompatLoader.getCompat(null);
     }
 
@@ -106,7 +106,10 @@ public class HBaseStorageSetup {
         if (!StringUtils.isEmpty(graphName)) config.set(GraphDatabaseConfiguration.GRAPH_NAME, graphName);
         config.set(GraphDatabaseConfiguration.TIMESTAMP_PROVIDER, HBaseStoreManager.PREFERRED_TIMESTAMPS);
         config.set(SimpleBulkPlacementStrategy.CONCURRENT_PARTITIONS, 1);
-        config.set(GraphDatabaseConfiguration.DROP_ON_CLEAR, false);
+        // TODO: RAY changed
+        config.set(HBaseStoreManager.SKIP_SCHEMA_CHECK, true);
+        // TODO: RAY changed
+        config.set(GraphDatabaseConfiguration.DROP_ON_CLEAR, true);
 
         return config;
     }

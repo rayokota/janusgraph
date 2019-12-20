@@ -26,11 +26,11 @@ public class HBaseGraphProvider extends AbstractJanusGraphProvider {
 
     @Override
     public ModifiableConfiguration getJanusGraphConfiguration(String graphName, Class<?> test, String testMethodName) {
-        try {
-            HBaseStorageSetup.startHBase();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            HBaseStorageSetup.startHBase();
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
         return HBaseStorageSetup.getHBaseConfiguration(graphName);
     }
 }
